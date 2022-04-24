@@ -3,15 +3,18 @@ import { AuthCredentialsDto } from './dto/auth-credentials.dto';
 import { BadRequestException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 import { User } from '../users/entities/user.entity';
+import { GenericFunctions } from '../shared/services/generic-functions';
 
 @EntityRepository(User)
 export class AuthRepository extends Repository<User> {
+  private genericFunctions = new GenericFunctions();
+
   async signUp(authCredentialsDto: AuthCredentialsDto): Promise<void> {
     const { email, password } = authCredentialsDto;
     const exist = await this.findOne({ email, isDeleted: false });
 
     if (exist) {
-      throw new BadRequestException('User already exist!');
+      throw new BadRequestException();
     }
 
     const salt = await bcrypt.genSalt();
@@ -20,7 +23,10 @@ export class AuthRepository extends Repository<User> {
     user.email = email;
     user.username = email.split('@')[0];
     user.salt = salt;
-    user.password = await this.hashPassword(password, user.salt);
+    user.password = await this.genericFunctions.hashPassword(
+      password,
+      user.salt,
+    );
 
     try {
       await user.save();
@@ -41,9 +47,5 @@ export class AuthRepository extends Repository<User> {
     } else {
       return null;
     }
-  }
-
-  private async hashPassword(password: string, salt: string): Promise<string> {
-    return bcrypt.hash(password, salt);
   }
 }

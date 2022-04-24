@@ -3,16 +3,19 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  Index,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { IsEmail, IsEmpty, MinLength } from 'class-validator';
+import { Exclude } from 'class-transformer';
 
 @Entity()
+@Index(['fullName', 'username', 'email'], { fulltext: true })
 export class User extends BaseEntity {
-  @PrimaryGeneratedColumn()
-  id: number;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column({ length: 30, nullable: true })
   fullName: string;
@@ -28,13 +31,16 @@ export class User extends BaseEntity {
 
   @Column({ nullable: false })
   @IsEmpty()
+  @Exclude()
   password: string;
 
   @Column({ nullable: false })
   @IsEmpty()
+  @Exclude()
   salt: string;
 
   @Column({ default: false })
+  @Exclude()
   isDeleted: boolean;
 
   @CreateDateColumn({
@@ -51,11 +57,14 @@ export class User extends BaseEntity {
   })
   public updatedAt: Date;
 
+  @Column({ default: false })
+  isAdmin: boolean;
+
   /*
     TODO: add email validation for signup
     @Column({ default: false })
     isActive: boolean;
-    */
+   */
 
   async validatePassword(password: string): Promise<boolean> {
     const hash = await bcrypt.hash(password, this.salt);

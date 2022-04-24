@@ -1,26 +1,39 @@
 import { Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { UsersRepository } from './users.repository';
+import { FilterDto } from '../shared/dto/filter.dto';
+import { User } from './entities/user.entity';
 
 @Injectable()
 export class UsersService {
-  create(createUserDto: CreateUserDto) {
-    return 'This action adds a new user';
+  constructor(
+    @InjectRepository(UsersRepository)
+    private readonly userRepository: UsersRepository,
+  ) {}
+
+  create(createUserDto: CreateUserDto): Promise<User> {
+    return this.userRepository.createUser(createUserDto);
   }
 
-  findAll() {
-    return `This action returns all users`;
+  findAll(filterDto: FilterDto): Promise<User[]> {
+    return this.userRepository.getUsersWithSearchQuery(filterDto);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  findOne(id: string): Promise<User> {
+    return this.userRepository.getUserById(id);
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  update(id: string, updateUserDto: UpdateUserDto): Promise<User> {
+    return this.userRepository.updateUser(id, updateUserDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  updateMyUser(user: User, updateUserDto: UpdateUserDto): Promise<User> {
+    return this.userRepository.updateUser(user, updateUserDto);
+  }
+
+  remove(id: string): Promise<User> {
+    return this.userRepository.deleteUser(id);
   }
 }

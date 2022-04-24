@@ -15,6 +15,11 @@ export class AuthService {
     private jwtService: JwtService,
   ) {}
 
+  // Decoding the JWT Token
+  public async decode(token: string): Promise<unknown> {
+    return this.jwtService.decode(token, null);
+  }
+
   async signUp(authCredentialsDto: AuthCredentialsDto): Promise<void> {
     return this.userRepository.signUp(authCredentialsDto);
   }
@@ -30,12 +35,16 @@ export class AuthService {
       throw new UnauthorizedException('Invalid credentials');
     }
 
-    const payload: JwtPayload = { id: user.id, email: user.email };
+    const payload: JwtPayload = {
+      id: user.id,
+      email: user.email,
+      isAdmin: user.isAdmin,
+    };
     const token = await this.jwtService.sign(payload);
     this.logger.debug(
       `Generated JWT Token with payload ${JSON.stringify(payload)}`,
     );
 
-    return { token };
+    return { token: `Bearer ${token}` };
   }
 }
