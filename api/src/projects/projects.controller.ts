@@ -1,17 +1,23 @@
 import {
   Body,
+  ClassSerializerInterceptor,
   Controller,
   Delete,
   Get,
   Param,
   Patch,
   Post,
+  UseGuards,
+  UseInterceptors,
 } from '@nestjs/common';
 import { ProjectsService } from './projects.service';
 import { CreateProjectDto } from './dto/create-project.dto';
 import { UpdateProjectDto } from './dto/update-project.dto';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('projects')
+@UseGuards(AuthGuard())
+@UseInterceptors(ClassSerializerInterceptor)
 export class ProjectsController {
   constructor(private readonly projectsService: ProjectsService) {}
 
