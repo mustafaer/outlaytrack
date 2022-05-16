@@ -1,2 +1,2 @@
 # outlaytrack
-Follow and manage your outlay.
+Follow and manage your outlays.
