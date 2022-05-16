@@ -1,0 +1,64 @@
+@import "./src/app/shared/styles/variables.scss";
+
+#main {
+  transition: margin-left 0.5s;
+  padding: 0 16px;
+  top: 54px;
+  position: relative;
+  height: calc(100vh - 54px);
+}
+
+.application-select-area {
+  padding: 14px;
+  box-shadow: none !important;
+
+  i {
+    font-size: 25px;
+  }
+}
+
+.sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: $sidebar-background-color;
+  overflow-x: hidden;
+  transition: 0.4s;
+  padding-top: 60px;
+  -webkit-box-shadow: 3px 2px 17px -5px #000000;
+  box-shadow: 3px 2px 17px -5px #000000;
+
+  a {
+    text-decoration: none;
+    transition: 0.3s;
+    padding: 3px 14px;
+    color: $sidebar-content-color;
+    display: flex;
+    font-size: 14px;
+    line-height: 1.4;
+    letter-spacing: 0.03rem;
+    font-weight: 500;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
+    :hover {
+      color: black;
+    }
+  }
+
+  ul {
+    padding-inline-start: 5px;
+
+    li {
+      list-style: none;
+
+      ul {
+        padding-inline-start: 25px;
+      }
+    }
+  }
+}

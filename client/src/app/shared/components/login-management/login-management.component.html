@@ -1,0 +1,27 @@
+<div class="login-page">
+    <div class="row inner-wrapper">
+        <div class="col-md-7 banner-section">
+        </div>
+        <div class="col-md-5 form-section">
+            <div class="content">
+                <div class="logo-section">
+                    <a class="logo">
+                        <img src="../../assets/images/mastercreager.png" alt="logo">
+                    </a>
+                </div>
+
+                <!--import components to here-->
+                <app-login *ngIf="activeComponent === 'login'" class="width-100"></app-login>
+                <app-password-request *ngIf="activeComponent === 'password-request'" class="width-100"></app-password-request>
+            </div>
+            <div class="auth_footer">
+                <p class="text-muted text-center">
+                    © Product by
+                    <a class="text-muted" href="https://mustafaer.net" target="_blank">
+                        Mustafa ER
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

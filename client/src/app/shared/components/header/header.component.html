@@ -1,0 +1,18 @@
+<div class="container-fluid main-header">
+    <a class="nav-link navbar-link ml-1 header-menu-in hed-w">
+        <div class="d-inline header-navigation align-bottom m-auto">
+            <a (click)="toggleSidebar()" class="nav-link navbar-link mt-2 ml-1 cursor-pointer header-menu-out pt-0"
+               id="toggle-sidebar">
+                <i [ngClass]="isSidebarOpen ? 'fa-solid fa-xmark fa-2x' : 'fa-solid fa-bars'" aria-hidden="true" class="fa-2x"></i>
+            </a>
+            <a class="nav-link navbar-link ms-4 cursor-pointer header-menu-out pt-0">
+                <img src="favicon.ico" alt="app logo" class="app-icon">
+            </a>
+            <a [routerLink]="['dashboard']"
+               class="nav-link custom-header-test d-xl-block d-lg-block d-md-block d-sm-none d-none "
+               routerLinkActive="color-black">
+                {{'appName' | translate}}
+            </a>
+        </div>
+    </a>
+</div>

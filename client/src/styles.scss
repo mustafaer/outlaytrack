@@ -1,1 +1,21 @@
 /* You can add global styles to this file, and also import other style files */
+body, html {
+  height: 100%;
+  margin: 0;
+}
+
+.color-black {
+  color: black !important;
+}
+
+.cursor-pointer {
+  cursor: pointer !important;
+}
+
+.width-100 {
+  width: 100% !important;
+}
+
+.position-absolute{
+  position: absolute !important;
+}

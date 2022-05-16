@@ -1,5 +1,27 @@
-# Client
+# Angular Structure Template
+Structure Template For Angular
 
+* Bootstrap 5
+* fontawesome-free 6
+* izitoast 1
+
+## Existing Properties
+### Dashboard Layout
+* Header
+* Sidebar
+* Dashboard
+### Login Layout
+* Login 
+* Password request 
+
+## General Properties
+* Auth guard
+* Login guard
+* Notification service
+* Translate service
+* Translate pipe
+* Split pipe
+-----------------------------------------------------------------------------------------------------
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.2.
 
 ## Development server

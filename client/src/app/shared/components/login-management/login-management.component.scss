@@ -1,0 +1,86 @@
+.login-page {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: white;
+
+  .signup-link {
+    margin: 20px auto 0 auto;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+
+    a {
+      display: inline-block;
+      margin-left: 10px
+    }
+  }
+
+  .auth_footer {
+    margin-top: 30px
+  }
+
+  .inner-wrapper {
+    width: 100%
+  }
+
+  .banner-section {
+    background: url("../../../../assets/images/login-background.jpg") no-repeat center !important;
+    background-size: 60%;
+    background-color: #fff;
+    display: flex;
+    align-items: flex-end;
+  }
+
+  .form-section {
+    background-color: #fff !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+
+    .logo-section {
+      margin: 0 auto 10px auto
+    }
+
+    form {
+      width: 100%;
+      max-width: 350px;
+      margin: 0 auto;
+    }
+
+    .content {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      -webkit-box-shadow: 0 0 9px 1px #707070;
+      box-shadow: 0 0 9px 1px #707070;
+      padding: 20px;
+    }
+  }
+
+  .banner-section .auth_footer {
+    padding: 20px 20px
+  }
+}
+
+@media (max-width: 767.98px) {
+  .login-page {
+    .banner-section {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 0;
+    }
+
+    .form-section {
+      padding: 10px;
+      z-index: 100;
+      background: rgba(255, 255, 255, .96)
+    }
+  }
+}

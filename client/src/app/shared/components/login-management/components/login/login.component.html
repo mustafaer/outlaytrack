@@ -1,0 +1,21 @@
+<form #loginForm="ngForm" autocomplete="off" id="login-form">
+    <input [(ngModel)]="loginModel.email" [placeholder]="'username' | translate" class="form-control mb-2"
+           id="username"
+           name="username"
+           required
+           type="text">
+    <input [(ngModel)]="loginModel.password" [placeholder]="'password' | translate" class="form-control mb-2"
+           id="password"
+           name="password"
+           required
+           type="password">
+    <button (click)="login()" [disabled]="!loginForm.valid"
+            class="btn btn-primary btn-block float-end"
+            id="sign-in"
+            type="submit"> {{'signIn' | translate}} </button>
+</form>
+<div class="signup-link">
+    <label (click)="forgotPassword()" class="cursor-pointer">
+        {{'iForgotMyPassword' | translate}}
+    </label>
+</div>
