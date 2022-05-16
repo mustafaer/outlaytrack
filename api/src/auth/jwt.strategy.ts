@@ -27,7 +27,6 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     if (typeof payload === 'string') {
       data = await this.jwtService.decode(payload.replace('Bearer ', ''));
     }
-    console.log('payload', data);
     const id = data.id;
     const user = await this.userRepository.findOne({ id });
 

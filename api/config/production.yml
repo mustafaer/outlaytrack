@@ -2,3 +2,5 @@ db:
   synchronize: false
 jwt:
   secret: 'topSecretProduction'
+server:
+  origin: 'http://example.com'
