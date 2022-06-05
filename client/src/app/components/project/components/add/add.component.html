@@ -1,0 +1,38 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <form #addForm="ngForm">
+                    <div class="card-body full-page-scroll">
+                        <div class="form-group mb-2">
+                            <label class="text-muted" for="name">{{'name' | translate}}</label>
+                            <input #name="ngModel"
+                                   [(ngModel)]="project.name"
+                                   [ngClass]="project.name && name.valid ? '' : 'is-invalid'" class="form-control" id="name" name="name"
+                                   type="text">
+                        </div>
+                    </div>
+                    <div class="card-footer" style="background-color: white;">
+                        <div class="btn-group float-end dropup">
+                            <button (click)="addItem(true)" [disabled]="addForm.invalid"
+                                    class="btn btn-primary btn-sm mb-2"
+                                    type="button">{{'save' | translate}}</button>
+                            <button [disabled]="addForm.invalid" aria-expanded="false"
+                                    class="btn btn-primary btn-sm mb-2 dropdown-toggle dropdown-toggle-split"
+                                    data-bs-toggle="dropdown" type="button">
+                                <span class="visually-hidden"></span>
+                            </button>
+                            <ul class="dropdown-menu bg-primary p-0">
+                                <li (click)="addItem()" class=" btn-primary btn-sm cursor-pointer">
+                                    {{'saveAndContinue' | translate}}
+                                </li>
+                            </ul>
+                        </div>
+                        <button (click)="cancel()" class="btn btn-link btn-clear-link float-end btn-sm"
+                                type="button">{{'cancel' | translate}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

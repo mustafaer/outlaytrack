@@ -1,0 +1,73 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="row py-2 px-3">
+                    <div class="col-12">
+                        <div class="btn-group float-end">
+                            <div class="cursor-pointer" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa-solid fa-ellipsis"></i>
+                            </div>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <span (click)="openDeleteModal()" class="dropdown-item cursor-pointer">{{'delete' | translate}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <form #editForm="ngForm">
+                    <div class="card-body full-page-scroll">
+                        <div class="form-group mb-2">
+                            <label class="text-muted" for="email">{{'email' | translate}}</label>
+                            <input #email="ngModel" [(ngModel)]="user.email"
+                                   [ngClass]="user.email && email.valid ? '' : 'is-invalid'" class="form-control" email
+                                   id="email"
+                                   name="email"
+                                   required
+                                   type="email">
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="text-muted" for="fullName">{{'fullName' | translate}}</label>
+                            <input [(ngModel)]="user.fullName" class="form-control" id="fullName" name="fullName"
+                                   type="text">
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="text-muted" for="username">{{'username' | translate}}</label>
+                            <input [(ngModel)]="user.username" class="form-control" id="username" name="username"
+                                   type="text">
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="text-muted" for="assignedUsers">{{'assignedUsers' | translate}}</label>
+                            <ng-select [(ngModel)]="user.projects" name="users"
+                                       [multiple]="true"
+                                       bindLabel="name"
+                                       [closeOnSelect]="false"
+                                       [class]="user.projects ? '' : 'is-invalid'" [items]="projects"
+                                       id="assignedUsers"></ng-select>
+                        </div>
+                    </div>
+                    <div class="card-footer" style="background-color: white;">
+                        <div class="btn-group float-end dropup">
+                            <button (click)="editItem(true)" [disabled]="editForm.invalid" class="btn btn-primary btn-sm mb-2"
+                                    type="button">{{'save' | translate}}</button>
+                            <button [disabled]="editForm.invalid" aria-expanded="false"
+                                    class="btn btn-primary btn-sm mb-2 dropdown-toggle dropdown-toggle-split"
+                                    data-bs-toggle="dropdown" type="button">
+                                <span class="visually-hidden"></span>
+                            </button>
+                            <ul class="dropdown-menu bg-primary p-0">
+                                <li (click)="editItem()" class=" btn-primary btn-sm cursor-pointer">
+                                    {{'saveAndContinue' | translate}}
+                                </li>
+                            </ul>
+                        </div>
+                        <button (click)="cancel()" class="btn btn-link btn-clear-link float-end btn-sm"
+                                type="button">{{'cancel' | translate}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<app-delete-modal [customizationConfig]="customizationConfig" [data]="user"></app-delete-modal>

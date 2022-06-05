@@ -1,0 +1,15 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12 d-flex justify-content-end p-0">
+            <app-dynamic-search [customizationConfig]="customizationConfig" class="me-2"></app-dynamic-search>
+            <button [routerLink]="['add']" class="btn btn-outline-success" style="height: fit-content;" type="button">
+                <i class="fa-solid fa-plus"></i>
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <app-dynamic-table [customizationConfig]="customizationConfig"></app-dynamic-table>
+        </div>
+    </div>
+</div>

@@ -1,26 +1,42 @@
 import { Injectable } from '@nestjs/common';
+import { Project } from './entities/project.entity';
 import { CreateProjectDto } from './dto/create-project.dto';
+import { InjectRepository } from '@nestjs/typeorm';
 import { UpdateProjectDto } from './dto/update-project.dto';
+import { FilterDto } from '../shared/dto/filter.dto';
+import { ProjectsRepository } from './projects.repository';
 
 @Injectable()
 export class ProjectsService {
-  create(createProjectDto: CreateProjectDto) {
-    return 'This action adds a new project';
+  constructor(
+    @InjectRepository(ProjectsRepository)
+    private readonly projectRepository: ProjectsRepository,
+  ) {}
+
+  create(createProjectDto: CreateProjectDto): Promise<Project> {
+    return this.projectRepository.createProject(createProjectDto);
   }
 
-  findAll() {
-    return `This action returns all projects`;
+  getProjectsWithSearchQuery(filterDto: FilterDto): Promise<Project[]> {
+    return this.projectRepository.getProjectsWithSearchQuery(filterDto);
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} project`;
+  findOne(id: string): Promise<Project> {
+    return this.projectRepository.getProjectById(id);
   }
 
-  update(id: number, updateProjectDto: UpdateProjectDto) {
-    return `This action updates a #${id} project`;
+  async update(
+    id: string,
+    updateProjectDto: UpdateProjectDto,
+  ): Promise<Project> {
+    return this.projectRepository.updateProject(id, updateProjectDto);
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} project`;
+  async getUsersWithIdList(idList: string[]): Promise<Project[]> {
+    return await this.projectRepository.getProjectsWithIdList(idList);
+  }
+
+  remove(id: string): Promise<Project> {
+    return this.projectRepository.deleteProject(id);
   }
 }

@@ -19,3 +19,29 @@ body, html {
 .position-absolute{
   position: absolute !important;
 }
+
+.full-page-scroll{
+  height: calc(100vh - 175px);
+  overflow-y: auto;
+}
+
+.btn-clear-link{
+  color: #525c5d;
+  text-decoration: none !important;
+}
+
+.cursor-pointer{
+  cursor: pointer !important;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: darkgrey;
+}
+
+::-webkit-scrollbar-thumb {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}

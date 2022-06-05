@@ -5,10 +5,17 @@ import { UsersRepository } from './users.repository';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { GenericFunctions } from '../shared/services/generic-functions';
 import { AuthModule } from '../auth/auth.module';
+import { PassportModule } from '@nestjs/passport';
+import { ProjectsRepository } from '../projects/projects.repository';
+import { ProjectsService } from '../projects/projects.service';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([UsersRepository]), AuthModule],
+  imports: [
+    TypeOrmModule.forFeature([UsersRepository, ProjectsRepository]),
+    AuthModule,
+    PassportModule.register({ defaultStrategy: 'jwt' }),
+  ],
   controllers: [UsersController],
-  providers: [UsersService, GenericFunctions],
+  providers: [UsersService, GenericFunctions, ProjectsService],
 })
 export class UsersModule {}

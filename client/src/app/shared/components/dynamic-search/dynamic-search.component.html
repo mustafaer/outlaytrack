@@ -1,0 +1,8 @@
+<div class="input-group">
+    <input (keyup)="search()" [(ngModel)]="searchValue" [class]="customClasses" [placeholder]="placeholder | translate"
+           aria-describedby="basic-addon2" class="form-control" name="searchValue"
+           type="text">
+    <span (click)="search()" class="input-group-text cursor-pointer" id="basic-addon2">
+        <i class="fa-solid fa-magnifying-glass"></i>
+    </span>
+</div>

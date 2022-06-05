@@ -1,0 +1,29 @@
+<div class="container-fluid mt-2 p-0">
+    <div class="row p-0">
+        <div class="col-12 p-0">
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-responsive table-content-scroll">
+                        <table class="table table-borderless table-hover">
+                            <thead>
+                            <tr class="sticky-top bg-white">
+                                <th *ngFor="let header of headers" scope="col">
+                                    {{header.displayNameKey | translate}}
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let datum of tableData" [routerLink]="['edit', datum.id]"
+                                class="cursor-pointer">
+                                <td *ngFor="let header of headers">
+                                    {{datum[header.valueKey] ? (header.type === 'date' ? (datum[header.valueKey] | date: 'medium') : datum[header.valueKey]) : ''}}
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,67 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <form #addForm="ngForm">
+                    <div class="card-body full-page-scroll">
+                        <div class="form-group mb-2">
+                            <label class="text-muted" for="email">{{'email' | translate}}</label>
+                            <input #email="ngModel" [(ngModel)]="user.email"
+                                   [ngClass]="user.email && email.valid ? '' : 'is-invalid'" class="form-control" email
+                                   id="email"
+                                   name="email"
+                                   required
+                                   type="email">
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="text-muted" for="email">{{'password' | translate}}</label>
+                            <input [(ngModel)]="user.password" [ngClass]="user.password ? '' : 'is-invalid'"
+                                   class="form-control" id="password"
+                                   name="password"
+                                   required
+                                   type="password">
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="text-muted" for="fullName">{{'fullName' | translate}}</label>
+                            <input [(ngModel)]="user.fullName" class="form-control" id="fullName" name="fullName"
+                                   type="text">
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="text-muted" for="username">{{'username' | translate}}</label>
+                            <input [(ngModel)]="user.username" class="form-control" id="username" name="username"
+                                   type="text">
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="text-muted" for="assignedUsers">{{'assignedProjects' | translate}}</label>
+                            <ng-select [(ngModel)]="user.projects" name="users"
+                                       [multiple]="true"
+                                       bindLabel="name"
+                                       bindValue="id"
+                                       [closeOnSelect]="false"
+                                       [class]="user.projects ? '' : 'is-invalid'" [items]="projects"
+                                       id="assignedUsers"></ng-select>
+                        </div>
+                    </div>
+                    <div class="card-footer" style="background-color: white;">
+                        <div class="btn-group float-end dropup">
+                            <button (click)="addItem(true)" [disabled]="addForm.invalid" class="btn btn-primary btn-sm mb-2"
+                                    type="button">{{'save' | translate}}</button>
+                            <button [disabled]="addForm.invalid" aria-expanded="false"
+                                    class="btn btn-primary btn-sm mb-2 dropdown-toggle dropdown-toggle-split"
+                                    data-bs-toggle="dropdown" type="button">
+                                <span class="visually-hidden"></span>
+                            </button>
+                            <ul class="dropdown-menu bg-primary p-0">
+                                <li (click)="addItem()" class=" btn-primary btn-sm cursor-pointer">
+                                    {{'saveAndContinue' | translate}}
+                                </li>
+                            </ul>
+                        </div>
+                        <button (click)="cancel()" class="btn btn-link btn-clear-link float-end btn-sm"
+                                type="button">{{'cancel' | translate}}</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

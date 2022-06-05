@@ -1,14 +1,12 @@
-import { IsNumber, IsString, Max, Min } from 'class-validator';
+import { IsString } from 'class-validator';
 
 export class FilterDto {
   @IsString()
   search = '';
-  @IsNumber()
-  @Min(0)
-  @Max(65535)
+  @IsString()
   offset = 0;
-  @IsNumber()
-  @Min(0)
-  @Max(100)
+  @IsString()
   limit = 10;
+  @IsString()
+  orderBy = '-updatedAt';
 }

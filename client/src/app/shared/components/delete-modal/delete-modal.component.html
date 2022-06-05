@@ -1,0 +1,16 @@
+<div class="modal fade" id="delete-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">{{'delete' | translate}}</h5>
+            </div>
+            <div class="modal-body">
+                {{'deleteConfirmationMessage' | translate}}
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-link btn-sm" style="text-decoration: unset;" data-bs-dismiss="modal">{{'close' | translate}}</button>
+                <button type="button" class="btn btn-danger" (click)="confirmDelete()">{{'confirm' | translate}}</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -5,12 +5,11 @@ import {
   Delete,
   Get,
   Param,
-  Patch,
   Post,
+  Put,
   Query,
   UseGuards,
   UseInterceptors,
-  ValidationPipe,
 } from '@nestjs/common';
 import { UsersService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
@@ -19,10 +18,8 @@ import { FilterDto } from '../shared/dto/filter.dto';
 import { GetUser } from '../auth/get-user.decorators';
 import { User } from './entities/user.entity';
 import { AdminGuard } from '../shared/guards/admin.guard';
-import { AuthGuard } from '@nestjs/passport';
 
 @Controller('users')
-@UseGuards(AuthGuard())
 @UseInterceptors(ClassSerializerInterceptor)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
@@ -35,8 +32,8 @@ export class UsersController {
 
   @Get()
   @UseGuards(AdminGuard)
-  findAll(@Query(ValidationPipe) filterDto: FilterDto) {
-    return this.usersService.findAll(filterDto);
+  getUsersWithSearchQuery(@Query() filterDto: FilterDto) {
+    return this.usersService.getUsersWithSearchQuery(filterDto);
   }
 
   @Get('myuser')
@@ -50,13 +47,13 @@ export class UsersController {
     return this.usersService.findOne(id);
   }
 
-  @Patch(':id')
+  @Put(':id')
   @UseGuards(AdminGuard)
   update(@Param('id') id: string, @Body() updateUserDto: UpdateUserDto) {
     return this.usersService.update(id, updateUserDto);
   }
 
-  @Patch()
+  @Put()
   updateMyUser(@Body() updateUserDto: UpdateUserDto, @GetUser() user: User) {
     return this.usersService.updateMyUser(user, updateUserDto);
   }

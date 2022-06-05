@@ -82,6 +82,18 @@ export class ServerConnectionsService {
     );
   }
 
+  ServerPatch(address: string, data: any): Observable<any> {
+    const headers = this.setHeadersWithToken();
+    const options = { headers };
+    return this.http.patch(address, data, options).pipe(
+      map((res) => res),
+      catchError((err) => {
+        this.ServerError(err);
+        return throwError(err);
+      })
+    );
+  }
+
   ServerDelete(address: string, data = {}): Observable<any> {
     const headers = this.setHeadersWithToken();
     const options = { headers, body: data };
@@ -134,6 +146,18 @@ export class ServerConnectionsService {
     const headers = this.setHeadersWithoutToken();
     const options = { headers };
     return this.http.put(address, data, options).pipe(
+      map((res) => res),
+      catchError((err) => {
+        this.ServerError(err);
+        return throwError(err);
+      })
+    );
+  }
+
+  ServerPatchWithoutLogin(address: string, data: any): Observable<any> {
+    const headers = this.setHeadersWithoutToken();
+    const options = { headers };
+    return this.http.patch(address, data, options).pipe(
       map((res) => res),
       catchError((err) => {
         this.ServerError(err);

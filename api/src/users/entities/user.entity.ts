@@ -4,12 +4,15 @@ import {
   CreateDateColumn,
   Entity,
   Index,
+  JoinTable,
+  ManyToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
 import { IsEmail, IsEmpty, MinLength } from 'class-validator';
 import { Exclude } from 'class-transformer';
+import { Project } from '../../projects/entities/project.entity';
 
 @Entity()
 @Index(['fullName', 'username', 'email'], { fulltext: true })
@@ -59,6 +62,12 @@ export class User extends BaseEntity {
 
   @Column({ default: false })
   isAdmin: boolean;
+
+  @ManyToMany(() => Project, (project) => project.users, {
+    cascade: true,
+  })
+  @JoinTable()
+  projects: Project[];
 
   /*
     TODO: add email validation for signup
